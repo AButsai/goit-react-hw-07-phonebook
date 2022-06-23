@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addContactActions } from '../../redux/contacts/contactsActions';
-import { getAllContacts } from 'redux/contacts/contacts-selector';
+import { contactsSelectors } from 'redux/contacts';
+import { fetchAddContact } from 'redux/contacts/contactsOperations';
 
 import s from './ContactForm.module.css';
 
 const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  const allContacts = useSelector(getAllContacts);
+  const allContacts = useSelector(contactsSelectors.getAllContacts);
   const dispatch = useDispatch();
 
   const handleChange = e => {
@@ -44,7 +44,7 @@ const ContactForm = () => {
     if (contactsCheck(name)) {
       alert(`Контакт с именем ${name} уже существует в ваших контактах`);
     } else {
-      dispatch(addContactActions({ name, number }));
+      dispatch(fetchAddContact({ name, number }));
     }
 
     reset();
