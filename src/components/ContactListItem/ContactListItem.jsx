@@ -1,7 +1,12 @@
 import PropTypes from 'prop-types';
+import { Spinner } from 'react-bootstrap';
 import s from './ContactListItem.module.css';
 
-const ContactListItem = ({ contacts: { id, name, number }, deleteContact }) => {
+const ContactListItem = ({
+  contacts: { id, name, number },
+  deleteContact,
+  isLoading,
+}) => {
   return (
     <li className={s.item}>
       <span className={s.span}>
@@ -9,7 +14,8 @@ const ContactListItem = ({ contacts: { id, name, number }, deleteContact }) => {
       </span>
       <button
         className={s.btn}
-        onClick={() => {
+        id={id}
+        onClick={e => {
           deleteContact(id);
         }}
         onMouseDown={e => {
@@ -18,10 +24,15 @@ const ContactListItem = ({ contacts: { id, name, number }, deleteContact }) => {
         }}
         onMouseUp={e => {
           e.target.style.backgroundColor = 'transparent';
+          e.target.style.color = '#000000';
         }}
         type="button"
       >
-        Delete
+        {isLoading ? (
+          <Spinner animation="border" variant="dark" size="sm" />
+        ) : (
+          'Delete'
+        )}
       </button>
     </li>
   );
@@ -33,7 +44,7 @@ ContactListItem.propTypes = {
     name: PropTypes.string.isRequired,
     number: PropTypes.string.isRequired,
   }),
-
+  isLoading: PropTypes.bool,
   deleteContact: PropTypes.func.isRequired,
 };
 
