@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { filterContactsActions } from 'redux/contacts/contactsActions';
-import { filterContact } from 'redux/contacts/contactsSelector';
+import { filterContact } from 'redux/contacts/contactsSelectors';
 import ContactListItem from 'components/ContactListItem';
 import {
   fetchContacts,
   fetchDeleteContact,
 } from 'redux/contacts/contactsOperations';
-import { getIsLoading } from 'redux/contacts/contactsSelector';
+import { getIsLoading } from 'redux/contacts/contactsSelectors';
 
 import s from './ContactList.module.css';
 
