@@ -7,7 +7,7 @@ import {
   fetchContacts,
   fetchDeleteContact,
 } from 'redux/contacts/contactsOperations';
-import { getIsLoading } from 'redux/contacts/contactsSelector';
+import { getIsLoading } from 'redux/contacts/contactsSelectors';
 
 import s from './ContactList.module.css';
 
