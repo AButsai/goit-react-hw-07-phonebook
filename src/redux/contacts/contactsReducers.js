@@ -9,9 +9,14 @@ import {
 
 const items = createReducer([], {
   [fetchContacts.fulfilled]: (_, { payload }) => payload,
-  [fetchAddContact.fulfilled]: (state, { payload }) => [...state, payload],
+  [fetchAddContact.fulfilled]: (state, { payload }) => [...state, ...payload],
   [fetchDeleteContact.fulfilled]: (state, { payload }) =>
     [...state].filter(({ id }) => id !== payload.id),
+});
+
+const isLoading = createReducer(false, {
+  [fetchDeleteContact.pending]: () => true,
+  [fetchDeleteContact.fulfilled]: () => false,
 });
 
 const filter = createReducer('', {
@@ -20,5 +25,6 @@ const filter = createReducer('', {
 
 export default combineReducers({
   items,
+  isLoading,
   filter,
 });

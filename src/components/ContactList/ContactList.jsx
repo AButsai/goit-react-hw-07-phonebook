@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { filterContactsActions } from 'redux/contacts/contactsActions';
 import { filterContact } from 'redux/contacts/contactsSelectors';
@@ -6,12 +7,13 @@ import {
   fetchContacts,
   fetchDeleteContact,
 } from 'redux/contacts/contactsOperations';
-import { useEffect } from 'react';
+import { getIsLoading } from 'redux/contacts/contactsSelector';
 
 import s from './ContactList.module.css';
 
 const ContactList = () => {
   const allContact = useSelector(filterContact);
+  const isLoading = useSelector(getIsLoading);
 
   const dispatch = useDispatch();
 
@@ -31,6 +33,7 @@ const ContactList = () => {
           key={id}
           contacts={{ id, name, number }}
           deleteContact={deleteContact}
+          isLoading={isLoading}
         />
       ))}
     </ul>
