@@ -8,19 +8,30 @@ import {
 } from './contactsOperations';
 
 const items = createReducer([], {
-  [fetchContacts.fulfilled]: (_, { payload }) => payload,
-  [fetchAddContact.fulfilled]: (state, { payload }) => [...state, ...payload],
-  [fetchDeleteContact.fulfilled]: (state, { payload }) =>
-    [...state].filter(({ id }) => id !== payload.id),
+  [fetchContacts.fulfilled]: (_state, { payload }) => {
+    return payload;
+  },
+  [fetchAddContact.fulfilled]: (state, { payload }) => {
+    return [...state, payload];
+  },
+  [fetchDeleteContact.fulfilled]: (state, { payload }) => {
+    return [...state].filter(({ id }) => id !== payload.id);
+  },
 });
 
 const isLoading = createReducer(false, {
-  [fetchDeleteContact.pending]: () => true,
-  [fetchDeleteContact.fulfilled]: () => false,
+  [fetchDeleteContact.pending]: () => {
+    return true;
+  },
+  [fetchDeleteContact.fulfilled]: () => {
+    return false;
+  },
 });
 
 const filter = createReducer('', {
-  [filterContactsActions]: (_, { payload }) => payload,
+  [filterContactsActions]: (_state, { payload }) => {
+    return payload;
+  },
 });
 
 export default combineReducers({
