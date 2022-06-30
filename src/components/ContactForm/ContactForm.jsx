@@ -14,18 +14,7 @@ const ContactForm = () => {
   const handleChange = e => {
     const { name, value } = e.currentTarget;
 
-    switch (name) {
-      case 'name':
-        setName(value);
-        break;
-
-      case 'number':
-        setNumber(value);
-        break;
-
-      default:
-        return;
-    }
+    return name === 'name' ? setName(value) : setNumber(value);
   };
 
   const contactsCheck = name => {
